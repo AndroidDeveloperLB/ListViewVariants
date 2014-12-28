@@ -10,7 +10,7 @@ Screenshot
 Known Issues
 ------------
 
- 1. Missing some documentations and also some samples. Will work on this when I get the time.
+ 1. Missing some documentations and also some samples. Hope to work on this when I get the time. :)
  2. There is a huge issue on a very specific case, which I'm not sure what causes it (posted about it [here](http://stackoverflow.com/q/27676367/878126), in case you can help) :
    - The device is set to an RTL locale (like Hebrew).
   - The listView has a lot of items, and some of them are in RTL language (like Hebrew)
