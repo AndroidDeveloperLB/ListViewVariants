@@ -11,7 +11,6 @@ import android.os.Build;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -19,9 +18,11 @@ import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import lb.listviewvariants.R;
+
 public class CircularContactView extends ViewSwitcher
   {
-  private static final int DEFAULT_CONTENT_SIZE_IN_DP=20;
+  //  private static final int DEFAULT_CONTENT_SIZE_IN_DP=20;
   private ImageView mImageView;
   private TextView mTextView;
   private Bitmap mBitmap;
@@ -45,8 +46,7 @@ public class CircularContactView extends ViewSwitcher
     mTextView.setGravity(Gravity.CENTER);
     if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.ICE_CREAM_SANDWICH)
       mTextView.setAllCaps(true);
-    mContentSize=(int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,DEFAULT_CONTENT_SIZE_IN_DP,context.getResources()
-        .getDisplayMetrics());
+    mContentSize=getResources().getDimensionPixelSize(R.dimen.list_item__contact_imageview_size);
     if(isInEditMode())
       setTextAndBackgroundColor("",0xFFff0000);
     }
@@ -78,7 +78,7 @@ public class CircularContactView extends ViewSwitcher
       {
       mTextView.setText(mText);
       mTextView.setBackgroundDrawable(roundedBackgroundDrawable);
-      mTextView.setTextSize(viewHeight/5);
+      mTextView.setTextSize(viewHeight/4);
       }
     else if(mBitmap!=null)
       {
