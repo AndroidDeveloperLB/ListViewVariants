@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="list_item__contact_imageview_size">55dp</dimen>
+
+</resources>

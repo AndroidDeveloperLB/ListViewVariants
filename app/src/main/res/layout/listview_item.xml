@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:layoutDirection="ltr"
+              tools:ignore="UnusedAttribute"
+    >
+
+    <!--just a background view for the header, so that it won't interfere with the headers changes and row-clicking-->
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:background="?android:attr/colorBackground">
+
+        <include layout="@layout/pinned_header_listview_side_header"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:paddingBottom="6dp"
+        android:paddingRight="6dp"
+        android:paddingTop="6dp">
+
+        <lb.listviewvariants.utils.CircularContactView
+            android:id="@+id/listview_item__friendPhotoImageView"
+            android:layout_width="@dimen/list_item__contact_imageview_size"
+            android:layout_height="@dimen/list_item__contact_imageview_size"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/listview_item__friendNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:text="friend name"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText"/>
+
+    </LinearLayout>
+
+</LinearLayout>
