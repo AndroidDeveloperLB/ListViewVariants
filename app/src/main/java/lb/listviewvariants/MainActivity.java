@@ -1,6 +1,7 @@
 package lb.listviewvariants;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
@@ -11,6 +12,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -102,6 +105,39 @@ public class MainActivity extends ActionBarActivity
     Uri contactUri;
     String displayName;
     String photoId;
+    }
+
+  @Override
+  public boolean onCreateOptionsMenu(final Menu menu)
+    {
+    getMenuInflater().inflate(R.menu.activity_main,menu);
+    return super.onCreateOptionsMenu(menu);
+    }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean onOptionsItemSelected(final MenuItem item)
+    {
+    String url=null;
+    switch(item.getItemId())
+      {
+      case R.id.menuItem_all_my_apps:
+        url="https://play.google.com/store/apps/developer?id=AndroidDeveloperLB";
+        break;
+      case R.id.menuItem_all_my_repositories:
+        url="https://github.com/AndroidDeveloperLB";
+        break;
+      case R.id.menuItem_current_repository_website:
+        url="https://github.com/AndroidDeveloperLB/AndroidJniBitmapOperations";
+        break;
+      }
+    if(url==null)
+      return true;
+    final Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+    startActivity(intent);
+    return true;
     }
 
   // ////////////////////////////////////////////////////////////
@@ -230,6 +266,7 @@ public class MainActivity extends ActionBarActivity
       {
       return mContacts;
       }
+
 
     }
 
