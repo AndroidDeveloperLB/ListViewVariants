@@ -31,11 +31,11 @@ public abstract class IndexedPinnedHeaderListViewAdapter extends BasePinnedHeade
   public void configurePinnedHeader(final View v,final int position,final int alpha)
     {
     final TextView header=(TextView)v;
-    final int section=getSectionForPosition(position);
+    final int sectionIndex=getSectionForPosition(position);
     final Object[] sections=getSections();
     if(sections!=null&&sections.length!=0)
       {
-      final String title=(String)sections[section];
+      final CharSequence title=getSectionTitle(sectionIndex);
       header.setText(title);
       }
     if(VERSION.SDK_INT<VERSION_CODES.HONEYCOMB)

@@ -103,6 +103,12 @@ public class SectionedSectionIndexer implements SectionIndexer {
 		public abstract int getItemsCount();
 
 		public abstract Object getItem(int posInSection);
-	}
+
+  @Override
+  public String toString()
+    {
+    return name;
+    }
+  }
 
 }

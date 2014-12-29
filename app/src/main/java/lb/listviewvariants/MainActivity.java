@@ -2,6 +2,7 @@ package lb.listviewvariants;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
@@ -19,8 +20,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import lb.library.PinnedHeaderListView;
 import lb.library.SearchablePinnedHeaderListViewAdapter;
@@ -46,6 +50,21 @@ public class MainActivity extends ActionBarActivity
     mInflater=LayoutInflater.from(MainActivity.this);
     setContentView(R.layout.activity_main);
     final ArrayList<Contact> contacts=getContacts();
+    // mCollator = java.text.Collator.getInstance();
+    // mCollator.setStrength(java.text.Collator.PRIMARY);
+    Collections.sort(contacts,new Comparator<Contact>()
+    {
+    @Override
+    public int compare(Contact lhs,Contact rhs)
+      {
+      char lhsFirstLetter=TextUtils.isEmpty(lhs.displayName)?' ':lhs.displayName.charAt(0);
+      char rhsFirstLetter=TextUtils.isEmpty(rhs.displayName)?' ':rhs.displayName.charAt(0);
+      int firstLetterComparison=Character.toUpperCase(lhsFirstLetter)-Character.toUpperCase(rhsFirstLetter);
+      if(firstLetterComparison==0)
+        return lhs.displayName.compareTo(rhs.displayName);
+      return firstLetterComparison;
+      }
+    });
     mListView=(PinnedHeaderListView)findViewById(android.R.id.list);
     mAdapter=new ContactsAdapter(contacts);
 
@@ -73,23 +92,59 @@ public class MainActivity extends ActionBarActivity
 
   private ArrayList<Contact> getContacts()
     {
-    Uri uri=ContactsQuery.CONTENT_URI;
+    if(checkContactsReadPermission())
+      {
+      Uri uri=ContactsQuery.CONTENT_URI;
+      final Cursor cursor=managedQuery(uri,ContactsQuery.PROJECTION,ContactsQuery.SELECTION,null,ContactsQuery.SORT_ORDER);
+      if(cursor==null)
+        return null;
+      ArrayList<Contact> result=new ArrayList<>();
+      while(cursor.moveToNext())
+        {
+        Contact contact=new Contact();
+        contact.contactUri=ContactsContract.Contacts.getLookupUri(
+            cursor.getLong(ContactsQuery.ID),
+            cursor.getString(ContactsQuery.LOOKUP_KEY));
+        contact.displayName=cursor.getString(ContactsQuery.DISPLAY_NAME);
+        contact.photoId=cursor.getString(ContactsQuery.PHOTO_THUMBNAIL_DATA);
+        result.add(contact);
+        }
 
-    final Cursor cursor=managedQuery(uri,ContactsQuery.PROJECTION,ContactsQuery.SELECTION,null,ContactsQuery.SORT_ORDER);
-    if(cursor==null)
-      return null;
+      return result;
+      }
     ArrayList<Contact> result=new ArrayList<>();
-    while(cursor.moveToNext())
+    Random r=new Random();
+    StringBuilder sb=new StringBuilder();
+    for(int i=0;i<1000;++i)
       {
       Contact contact=new Contact();
-      contact.contactUri=ContactsContract.Contacts.getLookupUri(
-          cursor.getLong(ContactsQuery.ID),
-          cursor.getString(ContactsQuery.LOOKUP_KEY));
-      contact.displayName=cursor.getString(ContactsQuery.DISPLAY_NAME);
-      contact.photoId=cursor.getString(ContactsQuery.PHOTO_THUMBNAIL_DATA);
+      sb.delete(0,sb.length());
+      int strLength=r.nextInt(10)+1;
+      for(int j=0;j<strLength;++j)
+        switch(r.nextInt(3))
+          {
+          case 0:
+            sb.append((char)('a'+r.nextInt('z'-'a')));
+            break;
+          case 1:
+            sb.append((char)('A'+r.nextInt('Z'-'A')));
+            break;
+          case 2:
+            sb.append((char)('0'+r.nextInt('9'-'0')));
+            break;
+          }
+
+      contact.displayName=sb.toString();
       result.add(contact);
       }
     return result;
+    }
+
+  private boolean checkContactsReadPermission()
+    {
+    String permission="android.permission.READ_CONTACTS";
+    int res=checkCallingOrSelfPermission(permission);
+    return (res==PackageManager.PERMISSION_GRANTED);
     }
 
   @Override
@@ -150,6 +205,12 @@ public class MainActivity extends ActionBarActivity
     private final int[] PHOTO_TEXT_BACKGROUND_COLORS;
     private final AsyncTaskThreadPool mAsyncTaskThreadPool=new AsyncTaskThreadPool(1,2,10);
 
+    @Override
+    public CharSequence getSectionTitle(int sectionIndex)
+      {
+      return ((StringArrayAlphabetIndexer.AlphaBetSection)getSections()[sectionIndex]).getName();
+      }
+
     public ContactsAdapter(final ArrayList<Contact> contacts)
       {
       setData(contacts);
@@ -162,7 +223,7 @@ public class MainActivity extends ActionBarActivity
       {
       this.mContacts=contacts;
       final String[] generatedContactNames=generateContactNames(contacts);
-      setSectionIndexer(new StringArrayAlphabetIndexer(generatedContactNames));
+      setSectionIndexer(new StringArrayAlphabetIndexer(generatedContactNames,true));
       }
 
     private String[] generateContactNames(final List<Contact> contacts)
