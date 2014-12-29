@@ -20,5 +20,6 @@ In case the headers should all be in uppercase, the sorting should make sure tha
 Known Issues
 ------------
 
-Just missing some documentations and also some samples. Hope to work on this when I get the time. :)
+1. Missing some documentations and also some samples. Hope to work on this when I get the time. :)
+2. RTL alignment on the headers (of the sample) isn't supported yet. Maybe it's a simple matter to fix.
 
