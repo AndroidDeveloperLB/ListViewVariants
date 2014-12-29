@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ListViewVariants.iml" filepath="$PROJECT_DIR$/ListViewVariants.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/Sample.iml" filepath="$PROJECT_DIR$/app/Sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
   </component>

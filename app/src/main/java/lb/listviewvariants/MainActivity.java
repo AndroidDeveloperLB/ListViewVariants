@@ -50,8 +50,6 @@ public class MainActivity extends ActionBarActivity
     mInflater=LayoutInflater.from(MainActivity.this);
     setContentView(R.layout.activity_main);
     final ArrayList<Contact> contacts=getContacts();
-    // mCollator = java.text.Collator.getInstance();
-    // mCollator.setStrength(java.text.Collator.PRIMARY);
     Collections.sort(contacts,new Comparator<Contact>()
     {
     @Override
