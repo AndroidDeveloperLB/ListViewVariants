@@ -22,4 +22,4 @@ Known Issues
 
 1. Missing some documentations and also some samples. Hope to work on this when I get the time. :)
 2. RTL alignment on the headers (of the sample) isn't supported yet. Maybe it's a simple matter to fix.
-
+However, this doesn't mean that it won't work on RTL locale of the device. Just not that the UI components will get mirrored (meaning it will look exactly like for English locale, for example) ...
