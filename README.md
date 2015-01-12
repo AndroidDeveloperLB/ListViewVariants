@@ -7,6 +7,8 @@ Screenshot
 ----------
 Here's a screenshot of how it shows the contacts of the device, very similar to how Lollipop's Contacts-app shows it , except for the blur, which I've added myself ... :)  
 
+![animated demo](https://raw.githubusercontent.com/AndroidDeveloperLB/ListViewVariants/master/demo.gif)
+
 ![enter image description here](https://raw.githubusercontent.com/AndroidDeveloperLB/ListViewVariants/master/device-2014-12-28-230610.png)
 
 Requirements
@@ -23,3 +25,8 @@ Known Issues
 1. Missing some documentations and also some samples. Hope to work on this when I get the time. :)
 2. RTL alignment on the headers (of the sample) isn't supported yet. Maybe it's a simple matter to fix.
 However, this doesn't mean that it won't work on RTL locale of the device. Just not that the UI components will get mirrored (meaning it will look exactly like for English locale, for example) ...
+
+Note
+----
+There is another nice alternative library for RecyclerView, here:
+https://github.com/TonicArtos/SuperSLiM
