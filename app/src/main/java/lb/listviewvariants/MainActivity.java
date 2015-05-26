@@ -181,7 +181,7 @@ public class MainActivity extends ActionBarActivity
         url="https://github.com/AndroidDeveloperLB";
         break;
       case R.id.menuItem_current_repository_website:
-        url="https://github.com/AndroidDeveloperLB/AndroidJniBitmapOperations";
+        url="https://github.com/AndroidDeveloperLB/ListViewVariants";
         break;
       }
     if(url==null)
