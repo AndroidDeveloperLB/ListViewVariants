@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="lb.listviewvariants">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!--<uses-permission android:name="android.permission.READ_CONTACTS"/>-->
     <application
         android:supportsRtl="false"
         android:allowBackup="true"
