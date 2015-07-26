@@ -78,7 +78,7 @@ public class CircularContactView extends ViewSwitcher
       {
       mTextView.setText(mText);
       mTextView.setBackgroundDrawable(roundedBackgroundDrawable);
-      mTextView.setTextSize(viewHeight/4);
+      mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, viewHeight / 2);
       }
     else if(mBitmap!=null)
       {
