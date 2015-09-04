@@ -6,7 +6,7 @@ import android.os.Build.VERSION_CODES;
 import android.view.View;
 import android.widget.TextView;
 
-public abstract class IndexedPinnedHeaderListViewAdapter extends BasePinnedHeaderListViewAdapter
+public abstract class IndexedPinnedHeaderListViewAdapter extends BasePinnedHeaderListViewAdapter implements PinnedHeaderContainer
   {
   private int _pinnedHeaderBackgroundColor;
   private int _pinnedHeaderTextColor;
