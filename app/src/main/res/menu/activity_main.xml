@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
-
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuItem_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always|collapseActionView"/>
     <item
         android:icon="@drawable/ic_action_action_info_outline"
         android:title="@string/more_info"
@@ -9,7 +14,7 @@
         <menu>
             <group
                 android:checkableBehavior="none"
-                android:menuCategory="container" >
+                android:menuCategory="container">
                 <item
                     android:id="@+id/menuItem_current_repository_website"
                     android:title="@string/repository_website">
